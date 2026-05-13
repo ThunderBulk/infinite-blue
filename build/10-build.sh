@@ -39,6 +39,10 @@ find /ctx/custom/ujust -iname '*.just' -exec printf "\n\n" \; -exec cat {} \; >>
 mkdir -p /etc/flatpak/preinstall.d/
 cp /ctx/custom/flatpaks/*.preinstall /etc/flatpak/preinstall.d/
 
+# Copy niri default config for new users
+mkdir -p /etc/skel/.config/niri/
+cp /ctx/custom/niri/config.kdl /etc/skel/.config/niri/config.kdl
+
 echo "::endgroup::"
 
 echo "::group:: Install Packages"
@@ -47,7 +51,7 @@ curl -fsSL https://pkgs.tailscale.com/stable/fedora/tailscale.repo -o /etc/yum.r
 # Install packages using dnf5
 # Example using COPR with isolated pattern:
 # copr_install_isolated "ublue-os/staging" package-name
-dnf5 install -y niri tailscale
+dnf5 install -y niri tailscale waybar mako fuzzel alacritty swaylock swaybg helix wl-clipboard xwayland-satellite brightnessctl
 echo "::endgroup::"
 
 echo "::group:: System Configuration"
