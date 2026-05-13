@@ -1,0 +1,97 @@
+// infinite-blue default niri config
+
+input {
+    keyboard {
+        xkb {
+            layout "gb"
+        }
+    }
+
+    touchpad {
+        tap
+        natural-scroll
+    }
+}
+
+layout {
+    gaps 8
+
+    border {
+        width 2
+        active-color "#89b4fa"
+        inactive-color "#45475a"
+    }
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    default-column-width { proportion 0.5; }
+
+    focus-ring {
+        off
+    }
+}
+
+spawn-at-startup "waybar"
+spawn-at-startup "mako"
+
+binds {
+    // Apps
+    Super+Return { spawn "alacritty"; }
+    Super+D { spawn "fuzzel"; }
+    Super+Shift+E { quit; }
+    Super+Shift+Slash { show-hotkey-overlay; }
+    Super+L { spawn "swaylock"; }
+
+    // Windows
+    Super+Q { close-window; }
+    Super+F { maximize-column; }
+    Super+Shift+F { fullscreen-window; }
+
+    // Focus (vim-style)
+    Super+Left  { focus-column-left; }
+    Super+Down  { focus-window-down; }
+    Super+Up    { focus-window-up; }
+    Super+Right { focus-column-right; }
+
+    // Move
+    Super+Shift+Left  { move-column-left; }
+    Super+Shift+Down  { move-window-down; }
+    Super+Shift+Up    { move-window-up; }
+    Super+Shift+Right { move-column-right; }
+
+    // Resize
+    Super+Minus { set-column-width "-10%"; }
+    Super+Equal { set-column-width "+10%"; }
+
+    // Workspaces
+    Super+1 { focus-workspace 1; }
+    Super+2 { focus-workspace 2; }
+    Super+3 { focus-workspace 3; }
+    Super+4 { focus-workspace 4; }
+    Super+5 { focus-workspace 5; }
+    Super+Shift+1 { move-column-to-workspace 1; }
+    Super+Shift+2 { move-column-to-workspace 2; }
+    Super+Shift+3 { move-column-to-workspace 3; }
+    Super+Shift+4 { move-column-to-workspace 4; }
+    Super+Shift+5 { move-column-to-workspace 5; }
+
+    // Column tiling
+    Super+Comma  { consume-window-into-column; }
+    Super+Period { expel-window-from-column; }
+
+    // Screenshots
+    Print { screenshot; }
+    Super+Print { screenshot-window; }
+    Ctrl+Print  { screenshot-screen; }
+
+    // Media keys
+    XF86AudioRaiseVolume  allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+    XF86AudioLowerVolume  allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+    XF86AudioMute         allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86MonBrightnessUp   { spawn "brightnessctl" "set" "10%+"; }
+    XF86MonBrightnessDown { spawn "brightnessctl" "set" "10%-"; }
+}
