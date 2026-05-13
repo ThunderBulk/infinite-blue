@@ -42,19 +42,19 @@ cp /ctx/custom/flatpaks/*.preinstall /etc/flatpak/preinstall.d/
 echo "::endgroup::"
 
 echo "::group:: Install Packages"
-
+# Add Tailscale repository
+curl -fsSL https://pkgs.tailscale.com/stable/fedora/tailscale.repo -o /etc/yum.repos.d/tailscale.repo
 # Install packages using dnf5
-# Example: dnf5 install -y tmux
-dnf5 install -y niri
 # Example using COPR with isolated pattern:
 # copr_install_isolated "ublue-os/staging" package-name
-
+dnf5 install -y niri tailscale
 echo "::endgroup::"
 
 echo "::group:: System Configuration"
 
 # Enable/disable systemd services
 systemctl enable podman.socket
+systemctl enable tailscaled
 # Example: systemctl mask unwanted-service
 
 echo "::endgroup::"
