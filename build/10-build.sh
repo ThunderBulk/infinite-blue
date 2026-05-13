@@ -43,7 +43,7 @@ echo "::endgroup::"
 
 echo "::group:: Install Packages"
 # Add Tailscale repository
-dnf config-manager --add-repo https://pkgs.tailscale.com/stable/fedora/tailscale.repo
+curl -fsSL https://pkgs.tailscale.com/stable/fedora/tailscale.repo -o /etc/yum.repos.d/tailscale.repo
 # Install packages using dnf5
 # Example using COPR with isolated pattern:
 # copr_install_isolated "ublue-os/staging" package-name
