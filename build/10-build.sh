@@ -51,7 +51,10 @@ curl -fsSL https://pkgs.tailscale.com/stable/fedora/tailscale.repo -o /etc/yum.r
 # Install packages using dnf5
 # Example using COPR with isolated pattern:
 # copr_install_isolated "ublue-os/staging" package-name
-dnf5 install -y niri tailscale waybar mako fuzzel alacritty swaylock swaybg helix wl-clipboard xwayland-satellite brightnessctl
+# Install niri and DankMaterialShell from COPR
+copr_install_isolated "avengemedia/dms" niri dms
+# Install remaining packages from official repos
+dnf5 install -y tailscale alacritty
 echo "::endgroup::"
 
 echo "::group:: System Configuration"
